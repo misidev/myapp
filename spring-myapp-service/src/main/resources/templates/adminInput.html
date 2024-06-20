@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Message and language input</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+</head>
+<body>
+
+<br>
+<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<!-- success message -->
+				<div class="alert alert-info" th:if="${param.success}">You've successfully registered!</div>
+
+				<h1>Message and language input</h1>
+
+				<form th:action="@{/api/v1/myapp/adminMessageInput}" method="post" th:object="${messageDifferentLanguage}">
+					<div class="form-group">
+						<label class="control-label" for="lang"> language </label>
+						<input id="lang" class="form-control" th:field="*{lang}"
+							 autofocus="autofocus" />
+					</div>
+
+					<div class="form-group">
+						<label class="control-label" for="messageDifLang"> message </label> <input
+							id="messageDifLang" class="form-control" th:field="*{messageDifLang}"
+							 autofocus="autofocus" />
+					</div>
+
+<!--					<div class="form-group">-->
+<!--						<div class="row">-->
+<!--							<div class="col-sm-6 col-sm-offset-3">-->
+<!--								<input type="submit" name="input-submit" id="input-submit"-->
+<!--									class="form-control btn btn-primary" value="input" />-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+						<button type="submit" class="form-control btn btn-success" name="input-submit" id="input-submit" >Submit</button>
+							</div>
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

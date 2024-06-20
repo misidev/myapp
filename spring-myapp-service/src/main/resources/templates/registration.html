@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration</title>
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" rel="stylesheet">
+
+    <style>
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .highlight-error {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <!-- success message -->
+            <div class="alert alert-info" th:if="${param.success}">You've successfully registered!</div>
+
+            <h1>Registration</h1>
+
+            <form method="post" onsubmit="return validateForm()" th:action="@{/api/v1/myapp/registration}" th:object="${user}">
+                <div class="form-group">
+                    <label class="control-label" for="firstName">First Name</label>
+                    <input autofocus class="form-control" id="firstName" th:field="*{firstName}">
+                    <div class="error-message" id="firstNameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="lastName">Last Name</label>
+                    <input class="form-control" id="lastName" th:field="*{lastName}">
+                    <div class="error-message" id="lastNameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="email">Email</label>
+                    <input class="form-control" id="email" required th:field="*{email}" type="email">
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="password">Password</label>
+                    <input class="form-control" id="password" th:field="*{password}" type="password">
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success" type="submit">Register</button>
+                    <span>Already registered? <a href="/" th:href="@{/api/v1/myapp/login}">Login here</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        var firstName = document.getElementById('firstName').value.trim();
+        var lastName = document.getElementById('lastName').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value.trim();
+        var isValid = true;
+
+        // Reset error messages and styles
+        document.getElementById('firstNameError').innerHTML = "";
+        document.getElementById('lastNameError').innerHTML = "";
+        document.getElementById('emailError').innerHTML = "";
+        document.getElementById('passwordError').innerHTML = "";
+        document.getElementById('firstName').classList.remove('highlight-error');
+        document.getElementById('lastName').classList.remove('highlight-error');
+        document.getElementById('email').classList.remove('highlight-error');
+        document.getElementById('password').classList.remove('highlight-error');
+
+        // Check if firstName is null or empty
+        if (!firstName) {
+            document.getElementById('firstNameError').innerHTML = "First name is required";
+            document.getElementById('firstName').classList.add('highlight-error');
+            isValid = false;
+        } else if (!/^[a-zA-Z]+$/.test(firstName)) { // Check if firstName contains only letters
+            document.getElementById('firstNameError').innerHTML = "First name must contain only letters";
+            document.getElementById('firstName').classList.add('highlight-error');
+            isValid = false;
+        } else {
+            clearFirstNameError();
+        }
+
+        // Validate last name - letters only
+        if (!lastName) {
+            document.getElementById('lastNameError').innerHTML = "Last name is required";
+            document.getElementById('lastName').classList.add('highlight-error');
+            isValid = false;
+        }else if (!/^[a-zA-Z]+$/.test(lastName)) {
+            document.getElementById('lastNameError').innerHTML = "Last name must contain only letters";
+            document.getElementById('lastName').classList.add('highlight-error');
+            isValid = false;
+        }else {
+            clearLastNameError();
+        }
+
+        // Validate email format
+        if (!email) {
+            document.getElementById('emailError').innerHTML = "Email is required";
+            document.getElementById('email').classList.add('highlight-error');
+            isValid = false;
+        }else if (!isValidEmail(email)) {
+            document.getElementById('emailError').innerHTML = "Invalid email format";
+            document.getElementById('email').classList.add('highlight-error');
+            isValid = false;
+        }else{
+           clearEmailError();
+        }
+
+        // Validate password format - minimum 8 characters, at least one letter, one number, and one special character
+        if (!password) {
+            document.getElementById('passwordError').innerHTML = "Password is required";
+            document.getElementById('password').classList.add('highlight-error');
+            isValid = false;
+        }else if (!/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)) {
+            document.getElementById('passwordError').innerHTML = "Password must be at least 8 characters long and contain at least one letter, one number, and one special character (@$!%*?&)";
+            document.getElementById('password').classList.add('highlight-error');
+            isValid = false;
+        } else{
+            clearPasswordError();
+        }
+
+        return isValid;
+    }
+
+    function isValidEmail(email) {
+        // Basic email format validation
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    function clearFirstNameError() {
+        document.getElementById('firstNameError').innerHTML = ""; // Clear the error message
+        document.getElementById('firstName').classList.remove('highlight-error'); // Remove the highlight class
+    }
+
+    function clearLastNameError() {
+        document.getElementById('lastNameError').innerHTML = ""; // Clear the error message
+        document.getElementById('lastName').classList.remove('highlight-error'); // Remove the highlight class
+    }
+
+    function clearEmailError() {
+         document.getElementById('emailError').innerHTML = ""; // Clear the error message
+         document.getElementById('email').classList.remove('highlight-error'); // Remove the highlight class
+    }
+
+    function clearPasswordError() {
+       document.getElementById('passwordError').innerHTML = ""; // Clear the error message
+       document.getElementById('password').classList.remove('highlight-error'); // Remove the highlight class
+    }
+
+
+// Example event listener (e.g., for input change or keyup event)
+document.getElementById('firstName').addEventListener('input', function() {
+    clearFirstNameError(); // Call this function whenever the user starts typing in the firstName field
+});
+
+document.getElementById('lastName').addEventListener('input', function() {
+    clearLastNameError(); // Call this function whenever the user starts typing in the lastName field
+});
+
+document.getElementById('email').addEventListener('input', function() {
+    clearEmailError(); // Call this function whenever the user starts typing in the email field
+});
+
+document.getElementById('password').addEventListener('input', function() {
+    clearPasswordError(); // Call this function whenever the user starts typing in the password field
+});
+
+</script>
+</body>
+
+</html>
