@@ -45,7 +45,7 @@ public class TestMocking {
     void testMessageDifferentLanguageExists() throws ClassNotFoundException {
         //tests whether class exists
         try {
-            Class a = Class.forName("com.example.demo.model.MessageDifferentLanguage");
+            Class a = Class.forName("com.myapp.spring_myapp_service.model.MessageDifferentLanguage");
             Assert.assertNotEquals("Test passed - class exists", a, null);
         } catch (AssertionError | ClassNotFoundException e) {
             assert false : "Test failed - class does not exist";

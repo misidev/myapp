@@ -2,6 +2,17 @@
 
 This service contains Login, registration, home and input message with different language page.
 
+How to **run** service on local:
+
+- Clone [myappService](https://github.com/misidev/myappService).
+- Configure java 18 SDK and apache-maven-3.9.6
+- Run the Spring Boot application.
+- Open Browser and go on [logIn page](http://localhost:8087/api/v1/myapp/login)
+- To access additional pages, logging in is required.
+- Pages links: [Registration](http://localhost:8087/api/v1/myapp/registration), [Home page](http://localhost:8087/), and [Message and language input](http://localhost:8087/api/v1/myapp/adminMessageInput). 
+- The home page is built on a React application, which has been integrated into the static folder of the Spring Boot application. 
+In case there are any issues with accessing the home page, you can clone the [React application](https://github.com/MiliSii/NineballReactApp/tree/main/nineball/my-app) repository, build it, and then copy its contents into the static folder.
+
 ## Endpoints in spring-myapp-service
 
 ### 1. LogIn
@@ -39,7 +50,9 @@ This service contains Login, registration, home and input message with different
   ![registration-page-lastname-invalid.png](spring-myapp-service/src/main/resources/images/registration-page-lastname-invalid.png)
   ![registration-page-lastname-valid.png](spring-myapp-service/src/main/resources/images/registration-page-lastname-valid.png)
 
+Validation for the input data displayed in the photos above has been implemented in [JavaScript](https://github.com/misidev/myappService/blob/0d149d0e7380cedc007c0d044a34324dcdf90a21/spring-myapp-service/src/main/resources/templates/registration.html#L72) within the HTML file. 
 * Error response example (backend - error in validation before adding data to DB)
+  This is an example of the service response validation - [service validation](https://github.com/misidev/myappService/blob/0d149d0e7380cedc007c0d044a34324dcdf90a21/spring-myapp-service/src/main/java/com/myapp/spring_myapp_service/impl/UserServiceImpl.java#L76).
 ```
 {
     "error": {
@@ -100,7 +113,7 @@ Hibernate: insert into users_roles (user_id, role_id) values (?, ?)
   ```bash
   curl -X GET "http://localhost:8087/api/v1/myapp/hello?lang=en"
 - **Response**:
-```aidl
+```json
     [
       {
         "id": 2,
@@ -112,8 +125,6 @@ Hibernate: insert into users_roles (user_id, role_id) values (?, ?)
 
 ### 5. Home page - React app on 
 ![home-page.jpeg](spring-myapp-service/src/main/resources/images/home-page.jpeg)
-
-
 
 
 PLANED IMPROVEMENT:
