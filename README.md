@@ -14,9 +14,9 @@ This service contains Login, registration, home and input message with different
   curl -X GET "http://localhost:8087/api/v1/myapp/login"
 - **Response**:
 
-  ![login_page.png](src/main/resources/images/login_page.png)
+  ![login_page.png](spring-myapp-service/src/main/resources/images/login_page.png)
 - **Invalid data - user is not registered**:
-  ![log-in-page-invalid.png](src/main/resources/images/log-in-page-invalid.png)
+  ![log-in-page-invalid.png](spring-myapp-service/src/main/resources/images/log-in-page-invalid.png)
 
 
 ### 2. Registration
@@ -30,14 +30,14 @@ This service contains Login, registration, home and input message with different
   curl -X GET "http://localhost:8087/api/v1/myapp/registration"
 - **Response**:
 
-  ![registration-page.png](src/main/resources/images/registration-page.png)
+  ![registration-page.png](spring-myapp-service/src/main/resources/images/registration-page.png)
 - **Invalid data - data for input is validated in service and also in js**:
-  ![registration-page-data-input-required.png](src/main/resources/images/registration-page-data-input-required.png)
-  ![registration-page-invalid.png](src/main/resources/images/registration-page-invalid.png)
-  ![registration-page-invalid-password1.png](src/main/resources/images/registration-page-invalid-password1.png)
-  ![registration-page-invalid-password2.png](src/main/resources/images/registration-page-invalid-password2.png)
-  ![registration-page-lastname-invalid.png](src/main/resources/images/registration-page-lastname-invalid.png)
-  ![registration-page-lastname-valid.png](src/main/resources/images/registration-page-lastname-valid.png)
+  ![registration-page-data-input-required.png](spring-myapp-service/src/main/resources/images/registration-page-data-input-required.png)
+  ![registration-page-invalid.png](spring-myapp-service/src/main/resources/images/registration-page-invalid.png)
+  ![registration-page-invalid-password1.png](spring-myapp-service/src/main/resources/images/registration-page-invalid-password1.png)
+  ![registration-page-invalid-password2.png](spring-myapp-service/src/main/resources/images/registration-page-invalid-password2.png)
+  ![registration-page-lastname-invalid.png](spring-myapp-service/src/main/resources/images/registration-page-lastname-invalid.png)
+  ![registration-page-lastname-valid.png](spring-myapp-service/src/main/resources/images/registration-page-lastname-valid.png)
 
 * Error response example (backend - error in validation before adding data to DB)
 ```
@@ -88,7 +88,7 @@ Hibernate: insert into users_roles (user_id, role_id) values (?, ?)
   ```bash
   curl -X GET "http://localhost:8087/api/v1/myapp/adminMessageInput"
 - **Response**:
-  ![message-and-language-input.png](src/main/resources/images/message-and-language-input.png)
+  ![message-and-language-input.png](spring-myapp-service/src/main/resources/images/message-and-language-input.png)
 
 ### 4. Get Message and language for hello
 
@@ -111,7 +111,7 @@ Hibernate: insert into users_roles (user_id, role_id) values (?, ?)
 ```
 
 ### 5. Home page - React app on 
-![home-page.jpeg](src/main/resources/images/home-page.jpeg)
+![home-page.jpeg](spring-myapp-service/src/main/resources/images/home-page.jpeg)
 
 
 
