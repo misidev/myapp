@@ -139,3 +139,5 @@ PLANED IMPROVEMENT:
 - Add username and confirm password in UI and in Entity for registration part (username is unique and password is equal to confirm password)
 - Add Small and Medium tests
 - Implement Lombok
+
+Feel free to add "Issues" with improvement ideas!
